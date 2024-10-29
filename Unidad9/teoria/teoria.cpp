@@ -47,7 +47,7 @@ struct Teoria
     string punto4=R"( 
     4. Como se realiza la Compilacion de programas multiarchivo
 
-    - En G++: se colocan los archivos de cabecera e implementación en la misma carpeta.
+    - En G++: se colocan los archivos de cabecera e implementación en la misma carpeta, o especificando la ubicacion relativa de uno al otro en sus.
     Luego listamos todos los .cpp usados en el programa en la orden g++:
 
     E:\AyEDI\Uni08>g++ -o Main.exe Main.cpp Myfunctions.cpp
