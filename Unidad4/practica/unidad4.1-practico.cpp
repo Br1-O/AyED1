@@ -245,9 +245,8 @@ int main(int argc, char const *argv[])
                     cout << " ******** Respuesta ******** " << endl << endl;
 
                     int maxQuantityLetters = 0;
-                    int currentWordQuantityLetters = 0;
 
-                    string currentWord, largestWord;
+                    string currentLine, currentWord, largestWord;
 
                     ifstream file;
 
@@ -255,29 +254,33 @@ int main(int argc, char const *argv[])
 
                     cin.ignore();
 
-                    getline(file, currentWord);
-
                     if (file.is_open())
                     {
-                       while (currentWord != "X")
-                       {
-                            currentWordQuantityLetters = 0;
+                         while (getline(file, currentLine)) 
+                        {
+                            size_t pos = 0; 
 
-                            for (size_t i = 0; i < currentWord.length(); i++)
+                            while ((pos = currentLine.find(" ")) != string::npos)
                             {
-                                currentWordQuantityLetters++;
+                                currentWord = currentLine.substr(0, pos);
+
+                                if (currentWord.length() > maxQuantityLetters)
+                                {
+                                    largestWord = currentWord;
+                                    maxQuantityLetters = currentWord.length();
+                                }
+
+                                currentLine.erase(0, pos + 1);
                             }
 
-                            if (currentWordQuantityLetters > maxQuantityLetters)
+                            if (!currentLine.empty() && currentLine.length() > maxQuantityLetters)
                             {
-                                largestWord = currentWord;
-                                maxQuantityLetters = currentWordQuantityLetters;
+                                largestWord = currentLine;
+                                maxQuantityLetters = currentLine.length();
                             }
+                        }
 
-                            getline(file, currentWord);
-                       }
-
-                       cout << "La palabra más larga es: " << largestWord << " con: " << maxQuantityLetters << " letras." << endl;
+                        cout << "La palabra más larga es: " << largestWord << " con: " << maxQuantityLetters << " letras." << endl;
                        
                     }
                     else

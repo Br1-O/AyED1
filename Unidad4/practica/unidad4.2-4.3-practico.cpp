@@ -40,9 +40,9 @@ int main(int argc, char const *argv[])
     //array with titles of options
     string options[sizeOptions] = 
     {
-    "Ejercicio 1 - (a)", 
-    "Ejercicio 1 - (b)", 
-    "Ejercicio 1 - (c)",
+    "Ejercicio 1", 
+    "Ejercicio 2", 
+    "Ejercicio 3",
     
     "Salir del programa."
     };
@@ -95,7 +95,7 @@ int main(int argc, char const *argv[])
                 {
                     cout << " ******** Ejercicio 1 ******** " << endl << endl;
 
-                    cout << "1. Realizar un programa que rellene un array con los 100 primeros números enteros y los muestre en pantalla" 
+                    cout << "1. Realizar un programa que rellene un array con los 100 primeros números enteros y los muestre en pantalla" 
                     << endl << endl;
                     
                     cout << " ******** Respuesta ******** " << endl << endl;
@@ -108,7 +108,7 @@ int main(int argc, char const *argv[])
                         numArray[i] = i+1;
                     }
 
-                    cout << "Los números del array son:" << endl;
+                    cout << "Los primeros 100 numeros naturales son:" << endl;
 
                     for (size_t i = 0; i < maxSizeArray; i++)
                     {
@@ -119,104 +119,65 @@ int main(int argc, char const *argv[])
                 }
                 case 1:
                 {
-                    cout << " ******** Ejercicio 1 ******** " << endl << endl;
+                    cout << " ******** Ejercicio 2 ******** " << endl << endl;
 
-                    cout << "b. Para el ejercicio anterior, Abrir el archivo y mostrar las frases x pantalla,"
-                    << " con cada frase en una línea, con Interlineado." 
+                    cout << "2. Realizar un Programa Que rellene un array con los números primos comprendidos entre 1 y 100 y los muestre en pantalla" 
                     << endl << endl;
 
                     cout << " ******** Respuesta ******** " << endl << endl;
 
-                    string currentWord;
-                    ifstream file;
+                    int primos[100];
+                    int contador = 0;
 
-                    file.open("frasesDeBjarme.txt");
+                    for (int i = 2; i <= 100; i++) {
+                        bool esPrimo = true;
 
-                    if (file.is_open())
-                    {
-                        cout << "El contenido actual del archivo frasesDeBjarme.txt es: " << endl << endl;
-
-                        cin.ignore();
-                        
-                        getline(file, currentWord);
-
-                        while (currentWord != "X")
-                        {
-                            cout << currentWord << endl <<endl;
-                            getline(file, currentWord);
+                        // Verificar si 'i' es primo
+                        for (int j = 2; j <= i / 2; j++) {
+                            if (i % j == 0) {
+                                esPrimo = false;
+                                break;
+                            }
                         }
 
-                        file.close();
+                        if (esPrimo) {
+                            primos[contador] = i;
+                            contador++;
+                        }
                     }
-                    else
-                    {
-                        cout << "No se ha podido abrir el archivo.";
+
+                    cout << "Los numeros primos entre 1 y 100 son:" << endl;
+                    for (int i = 0; i < contador; i++) {
+                        cout << primos[i] << " ";
                     }
+                    cout << endl << endl;
 
                     break;
                 }
                 case 2:
                 {
-                    cout << " ******** Ejercicio 1 ******** " << endl << endl;
+                    cout << " ******** Ejercicio 3 ******** " << endl << endl;
 
-                    cout << "c. Para el Archivo del ejercicio (a) contar la cantidad de palabras que hay x línea,"
-                    << " luego mostrar la cantidad total y el promedio de palabras x línea." 
+                    cout << "3. Realizar un Programa Que rellene un array con los numeros impares comprendidos entre 1 y 100 y los muestre en pantalla" 
                     << endl << endl;
 
                     cout << " ******** Respuesta ******** " << endl << endl;
 
-                    int quantityOfWordsPerLine = 0;
-                    int totalNumberOfWords = 0;
-                    int totalNumberOfLines = 0;
-                    int avrgQuantityOfWordsPerLine = 0;
+                    int impares[50];
+                    int contador = 0;
 
-                    string currentLine;
-
-                    ifstream file;
-
-                    file.open("frasesDeBjarme.txt");
-
-                    if (file.is_open())
-                    {
-                        cin.ignore();
-
-                        getline(file, currentLine);
-
-                        int currentLineNumber = 0;
-
-                        while (currentLine != "X" && currentLine != " ")
-                        {
-                            totalNumberOfLines++;
-                            currentLineNumber++;
-                            totalNumberOfWords++;
-
-                            int wordsInCurrentLine = 1;
-
-                            for (size_t i = 0; i < currentLine.length(); i++)
-                            {
-                                if (currentLine[i] == ' ')
-                                {
-                                    wordsInCurrentLine++;
-                                    totalNumberOfWords++;
-                                }
-                            }
-
-                            cout << "La cantidad de palabras en la linea: " << currentLineNumber << " es: "
-                            << wordsInCurrentLine <<endl <<endl;
-
-                            getline(file, currentLine);
+                    for (int i = 1; i <= 100; i++) {
+                        if (i % 2 != 0) {
+                            impares[contador] = i;
+                            contador++;
                         }
-
-                        avrgQuantityOfWordsPerLine = totalNumberOfWords / totalNumberOfLines;
-
-                        cout << "La cantidad total de palabras en el archivo es: " << totalNumberOfWords <<endl <<endl;
-                        cout << "El promedio de palabras por linea es: " << avrgQuantityOfWordsPerLine <<endl <<endl;
-
                     }
-                    else
-                    {
-                        cout << "No se ha podido abrir el archivo";
+
+                    cout << "Los numeros impares entre 1 y 100 son:" << endl;
+                    for (int i = 0; i < contador; i++) {
+                        cout << impares[i] << " ";
                     }
+                    cout << endl << endl;
                 
                     break;
                 }

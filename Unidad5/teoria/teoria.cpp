@@ -100,6 +100,7 @@ int main(int argc, char const *argv[])
     cout << teoria.punto2 << endl;
     cout << teoria.punto3 << endl;
     cout << teoria.punto4 << endl;
+    cout << teoria.punto5 << endl;
     
     return 0;
 }
