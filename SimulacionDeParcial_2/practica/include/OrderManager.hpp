@@ -45,6 +45,10 @@
             ArticleManager articleManagerInstance = ArticleManager::defaultArticleManager);
 
             bool cancelOrder();
+
+            //■■■■■■■■■ default instance ■■■■■■■■■//
+
+            static OrderManager defaultOrderManager;
     };
 
 #endif // ORDER_MANAGER_HPP

@@ -11,7 +11,7 @@
         void displayMenu();
 
         //get selected option from user
-        //void getSelectedOptionFromUser(int* selectedOption, Orders* studentList, tFilePath path);
+        void getSelectedOptionFromUser(int* selectedOption);
     
         //check input value
         void checkInputValueForInteger(int* inputVariable, std::string errorMessage = "Entrada invalida. Por favor, ingrese una opcion valida: ");

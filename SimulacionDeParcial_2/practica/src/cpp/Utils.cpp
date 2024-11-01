@@ -1,4 +1,8 @@
 #include <iostream>
+#include "../../include/ArticleManager.hpp"
+#include "../../include/ClientManager.hpp"
+#include "../../include/OrderManager.hpp"
+#include "../../include/Utils.hpp"
 
 using namespace std;
 
@@ -32,8 +36,7 @@ namespace utils
     };
 
     //get selected option from user
-    /*
-    void getSelectedOptionFromUser(int* selectedOption, tStudentList* studentList, tFilePath path){
+    void getSelectedOptionFromUser(int* selectedOption){
 
         checkInputValueForInteger(selectedOption);
 
@@ -42,51 +45,31 @@ namespace utils
 
         switch (*selectedOption)
         {
-            //display list based on ordering params
+            //display orders list
             case 1:
                 clearConsole();
 
-                displayAllStudents(*studentList);
+                OrderManager::defaultOrderManager.displayActiveOrders();
 
                 pauseConsole();
             break;
 
-            //search for a student
+            //create a new article
             case 2:
             {            
                 clearConsole();
 
-                int studentId;
-
-                cout << "Ingrese el id del alumno que busca: " << endl;
-
-                checkInputValueForInteger(&studentId, "Por favor, ingrese un id valido.");
-                cin.ignore();
-
-                const tStudent* studentFound = findStudentById(*studentList, studentId);
-
-                if(studentFound)
-                {
-                    displayStudent(studentFound);
-                }else
-                {
-                    cout << "No se ha podido encontrar al alumno en el listado.";
-                }
+                ArticleManager::defaultArticleManager.loadNewArticle();
 
                 pauseConsole();
             }
             break;
 
-            //insert a new student
+            //insert a new client
             case 3:
                 clearConsole();
 
-                insertStudent(studentList) && saveIntoFile(path, *studentList) 
-                ? 
-                    cout << "Se ha creado el registro del alumno correctamente" << endl
-                :
-                    cout << "No se ha podido registrar al alumno." << endl
-                ;
+                ClientManager::defaultClientManager.loadNewClient();
                 
                 pauseConsole();
             break;
@@ -96,17 +79,7 @@ namespace utils
             {            
                 clearConsole();
 
-                int studentId;
-                cout << "Ingrese el id del alumno que desea borrar: " << endl;
-                            
-                checkInputValueForInteger(&studentId, "Por favor, ingrese un id valido.");
-                cin.ignore();
-
-                deleteStudent(studentList, studentId) && saveIntoFile(path, *studentList) ?
-                    cout << "Alumno borrado correctamente del listado."
-                :
-                    cout << "No se ha podido borrar al estudiante del listado."
-                ;
+                OrderManager::defaultOrderManager.generateOrder();
                 
                 pauseConsole();
             }
@@ -123,7 +96,6 @@ namespace utils
             break;
         }
     };
-    */
 
     //check input value
     void checkInputValueForInteger(int* inputVariable, string errorMessage){

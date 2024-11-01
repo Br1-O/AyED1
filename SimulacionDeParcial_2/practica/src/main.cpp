@@ -22,10 +22,11 @@
 int main(int argc, char const *argv[])
 {
     int optionSelected = 0;
-    
+
     do
     {
         utils::displayMenu();
+        utils::getSelectedOptionFromUser(&optionSelected);
         
     } while (optionSelected != 999);
     
