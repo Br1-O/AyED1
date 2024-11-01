@@ -18,10 +18,13 @@
 #include "../include/OrderManager.hpp"
 #include "../include/Utils.hpp"
 
+#include "../resources/data/data.hpp"
 
 int main(int argc, char const *argv[])
 {
     int optionSelected = 0;
+
+    data::loadData();
 
     do
     {
