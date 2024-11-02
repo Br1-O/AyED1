@@ -6,6 +6,7 @@
 #include "../../include/OrderManager.hpp"
 #include "../../include/ClientManager.hpp"
 #include "../../include/ArticleManager.hpp"
+#include "../../include/EmployeeManager.hpp"
 #include "../../include/Utils.hpp"
 
 using namespace std;
@@ -62,8 +63,12 @@ void OrderManager::displayActiveOrders(){
         {
             cout << lineSeparator << endl;
             cout << "Orden: " << order->getId() << endl;
+
             cout << "Cliente: " << (order->getClient()).getName() << " " << (order->getClient()).getLastName() 
                 << " - id: " << (order->getClient()).getId() << endl << endl;
+
+            cout << "Empleado: " << (order->getEmployee()).getFirstName() << " " << (order->getEmployee()).getLastName() 
+            << " - id: " << (order->getClient()).getId() << endl << endl;
 
             cout << "Pedido: " << endl;
 
@@ -101,8 +106,8 @@ list<Order*> OrderManager::getOrdersbyClientId(int id){
     return foundOrders;
 };
 
-Order* OrderManager::generateOrder(ClientManager clientManagerInstance, ArticleManager articleManagerInstance) {
-    int id, clientId, articleId, productUnits = 0;
+Order* OrderManager::generateOrder(ClientManager clientManagerInstance, ArticleManager articleManagerInstance, EmployeeManager EmployeeManagerInstance) {
+    int id, clientId, employeeId, articleId, productUnits = 0;
     double totalCost = 0.0;
     Order* newOrder = nullptr;
 
@@ -116,60 +121,75 @@ Order* OrderManager::generateOrder(ClientManager clientManagerInstance, ArticleM
     Client clientCopy = clientManagerInstance.getClientById(clientId);
 
     if (clientCopy.getId() != 0) {
+
         utils::clearConsole();
 
-        std::cout << "Ingrese el id de los productos a incluir en el pedido." << std::endl;
-        std::cout << "Para terminar, ingrese: 0" << std::endl;
+        std::cout << "Por favor, ingrese el id del empleado que genera el pedido: " << std::endl;
+        std::cin >> employeeId;
+        std::cin.ignore();
 
-        do {
-            std::cout << "Ingrese el id del producto: " << std::endl;
-            std::cin >> articleId;
-            std::cin.ignore();
+        // Fetch a copy of the client instead of a pointer
+        Employee employeeCopy = EmployeeManagerInstance.getEmployeeById(employeeId);
 
-            Article articleCopy = articleManagerInstance.getArticleById(articleId);
+        if (employeeCopy.getId() != 0)
+        {
+            utils::clearConsole();
 
-            if (articleCopy.getId() != 0) {
-                std::cout << "Ingrese la cantidad de unidades del producto: " << std::endl;
-                std::cin >> productUnits;
+            std::cout << "Ingrese el id de los productos a incluir en el pedido." << std::endl;
+            std::cout << "Para terminar, ingrese: 0" << std::endl;
+
+            do {
+                std::cout << "Ingrese el id del producto: " << std::endl;
+                std::cin >> articleId;
                 std::cin.ignore();
 
-                try {
-                    // Use a deep copy of the article with updated quantity
-                    articleCopy.setQuantity(productUnits);
-                    articles.push_back(articleCopy);
+                Article articleCopy = articleManagerInstance.getArticleById(articleId);
 
-                    std::cout << "Producto agregado correctamente!" << std::endl;
-                } catch (const std::exception& e) {
-                    std::cerr << e.what() << '\n';
-                    std::cout << "No se pudo agregar el producto debido a un error." << std::endl;
+                if (articleCopy.getId() != 0) {
+                    std::cout << "Ingrese la cantidad de unidades del producto: " << std::endl;
+                    std::cin >> productUnits;
+                    std::cin.ignore();
+
+                    try {
+                        // Use a deep copy of the article with updated quantity
+                        articleCopy.setQuantity(productUnits);
+                        articles.push_back(articleCopy);
+
+                        std::cout << "Producto agregado correctamente!" << std::endl;
+                    } catch (const std::exception& e) {
+                        std::cerr << e.what() << '\n';
+                        std::cout << "No se pudo agregar el producto debido a un error." << std::endl;
+                    }
+                } else if (articleId != 0) {
+                    std::cout << "Producto no encontrado. Revise el id ingresado." << std::endl;
                 }
-            } else if (articleId != 0) {
-                std::cout << "Producto no encontrado. Revise el id ingresado." << std::endl;
+            } while (articleId != 0);
+
+            // Calculate total cost
+            for (const auto& article : articles) {
+                totalCost += article.getPrice() * article.getQuantity();
             }
-        } while (articleId != 0);
 
-        // Calculate total cost
-        for (const auto& article : articles) {
-            totalCost += article.getPrice() * article.getQuantity();
+            try {
+                // Determine new order ID
+                const auto& currentOrders = OrderManager::defaultOrderManager.getOrders();
+                id = currentOrders.empty() ? 1 : (currentOrders.back()->getId() + 1);
+
+                // Create a new Order with a unique copy of articles and client
+                newOrder = new Order(id, clientCopy, employeeCopy, articles, totalCost);
+
+                // Add the new order to the list
+                OrderManager::defaultOrderManager.setNewOrders(newOrder);
+
+                std::cout << "Orden agregada correctamente, con id: " << newOrder->getId() << std::endl;
+            } catch (const std::exception& e) {
+                std::cerr << e.what() << '\n';
+                std::cout << "No se pudo crear la orden." << std::endl;
+                delete newOrder;
+            }
         }
+        
 
-        try {
-            // Determine new order ID
-            const auto& currentOrders = OrderManager::defaultOrderManager.getOrders();
-            id = currentOrders.empty() ? 1 : (currentOrders.back()->getId() + 1);
-
-            // Create a new Order with a unique copy of articles and client
-            newOrder = new Order(id, clientCopy, articles, totalCost);
-
-            // Add the new order to the list
-            OrderManager::defaultOrderManager.setNewOrders(newOrder);
-
-            std::cout << "Orden agregada correctamente, con id: " << newOrder->getId() << std::endl;
-        } catch (const std::exception& e) {
-            std::cerr << e.what() << '\n';
-            std::cout << "No se pudo crear la orden." << std::endl;
-            delete newOrder;
-        }
     }
 
     return newOrder;

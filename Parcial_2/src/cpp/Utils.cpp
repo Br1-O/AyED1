@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../../include/ArticleManager.hpp"
 #include "../../include/ClientManager.hpp"
+#include "../../include/EmployeeManager.hpp"
 #include "../../include/OrderManager.hpp"
 #include "../../include/Utils.hpp"
 
@@ -11,10 +12,10 @@ namespace utils
     //funtion to display the menu
     void displayMenu(){
 
-        const string title = "--- Cosmeticos La Pestana Ana ---";
+        const string title = "--- Los gases nobles S.A. ---";
         const string message = "- Por favor, ingrese el numero de la accion que desea realizar -";
 
-        const int numberOfOptions = 8;
+        const int numberOfOptions = 10;
         string menu[numberOfOptions] = 
         {
             "1. Visualizar el listado de pedidos.",
@@ -24,7 +25,9 @@ namespace utils
             "5. Visualizar el listado de articulos.",
             "6. Visualizar el listado de clientes.",
             "7. Buscar pedido de cliente.",
-            "8. Salir.",
+            "8. Visualizar el listado de empleados.",
+            "9. Agregar un nuevo empleado.",
+            "10. Salir.",
         };
 
         cout << title << endl;
@@ -110,17 +113,66 @@ namespace utils
                 cin >> clientId;
                 cin.ignore();
 
-                (OrderManager::defaultOrderManager.getOrdersbyClientId(clientId).size() > 0 )
-                ?
-                cout << "Hay pedidos pendientes para el cliente."
-                :
-                cout << "No hay pedidos pendientes para el cliente.";
+                if(OrderManager::defaultOrderManager.getOrdersbyClientId(clientId).size() > 0 )
+                {
+                    string lineSeparator =  "---------------------------------";
+
+                    cout << "Hay pedidos pendientes para el cliente."<< endl << endl;
+
+                    for (const auto& order: (OrderManager::defaultOrderManager.getOrdersbyClientId(clientId)))
+                    {
+
+                        cout << lineSeparator << endl;
+                        cout << "Orden: " << order->getId() << endl;
+
+                        cout << "Cliente: " << (order->getClient()).getName() << " " << (order->getClient()).getLastName() 
+                            << " - id: " << (order->getClient()).getId() << endl << endl;
+
+                        cout << "Empleado: " << (order->getEmployee()).getFirstName() << " " << (order->getEmployee()).getLastName() 
+                        << " - id: " << (order->getEmployee()).getId() << endl << endl;
+
+                        cout << "Pedido: " << endl;
+
+                        for (const auto article : order->getArticles())
+                        {
+                            cout << "> " << article.getName() << " - " << "Cantidad: " << article.getQuantity() << endl;
+                        }
+                        
+                        
+                        cout << endl << "Total: $" << order->getTotalCost() << endl;
+
+                        cout << lineSeparator << endl;
+                    }
+
+
+                }else{
+                    cout << "No hay pedidos pendientes para el cliente.";
+
+                }
+            }
+            break;
+
+            //display list of employees
+            case 8:
+            {            
+                clearConsole();
+
+                EmployeeManager::defaultEmployeeManager.displayEmployeeList();
+            }
+            break;
+
+            //load a new employee
+            case 9:
+            {            
+                clearConsole();
+
+                EmployeeManager::defaultEmployeeManager.loadNewEmployee();
             }
             break;
 
             //exit the program
-            case 8:
-                *selectedOption = 8;
+            case 10:
+                *selectedOption = 10;
             break;
             
             //invalid input

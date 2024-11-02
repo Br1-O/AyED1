@@ -4,6 +4,7 @@
 #include <iostream>
 #include <list>
 #include "./Client.hpp"
+#include "./Employee.hpp"
 #include "./Article.hpp"
 
 class Order
@@ -12,6 +13,7 @@ class Order
 private:
     int id;
     Client client;
+    Employee employee;
     std::list<Article> articles;
     double totalCost;
 
@@ -23,6 +25,9 @@ public:
 
     // client
     Client getClient() const;
+
+    // employee
+    Employee getEmployee() const;
 
     // articles
     std::list<Article> getArticles() const;
@@ -36,10 +41,13 @@ public:
     void setId(int id);
 
     // client
-    void setClient(const Client& client); // Pass by const reference
+    void setClient(const Client& client);
+
+    // employee
+    void setEmployee(const Employee& employee);
 
     // articles
-    void setArticles(const std::list<Article>& articles); // Pass by const reference
+    void setArticles(const std::list<Article>& articles);
 
     // total cost
     void setTotalCost(double totalCost);
@@ -48,8 +56,9 @@ public:
 
     Order(            
         int id,
-        const Client& client,           // Pass by const reference
-        const std::list<Article>& articles, // Pass by const reference
+        const Client& client,
+        const Employee& employee,
+        const std::list<Article>& articles,
         double totalCost);
 
     //■■■■■■■■■ destructor ■■■■■■■■■//

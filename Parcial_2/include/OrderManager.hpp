@@ -6,6 +6,7 @@
     #include "./Order.hpp"
     #include "./ArticleManager.hpp"
     #include "./ClientManager.hpp"
+    #include "./EmployeeManager.hpp"
 
     class OrderManager
     {
@@ -44,7 +45,8 @@
             std::list<Order*> getOrdersbyClientId(int id);
 
             Order* generateOrder(ClientManager clientManagerInstance = ClientManager::defaultClientManager, 
-            ArticleManager articleManagerInstance = ArticleManager::defaultArticleManager);
+            ArticleManager articleManagerInstance = ArticleManager::defaultArticleManager, 
+            EmployeeManager EmployeeManagerInstance = EmployeeManager::defaultEmployeeManager);
 
             bool cancelOrder();
 

@@ -1,7 +1,8 @@
 #include "../../include/Order.hpp"
 #include "../../include/Client.hpp"
+#include "../../include/Employee.hpp"
 #include "../../include/Article.hpp"
-#include <list> // Include for std::list
+#include <list>
 
 //■■■■■■■■■ getters ■■■■■■■■■//
 
@@ -13,6 +14,11 @@ int Order::getId() const {
 // client
 Client Order::getClient() const {
     return client;
+}
+
+// employee
+Employee Order::getEmployee() const {
+    return employee;
 }
 
 // articles
@@ -33,12 +39,17 @@ void Order::setId(int id) {
 }
 
 // client
-void Order::setClient(const Client& client) { // Pass by const reference
+void Order::setClient(const Client& client) {
     this->client = client;
 }
 
+// employee
+void Order::setEmployee(const Employee& employee) {
+    this->employee = employee;
+}
+
 // articles
-void Order::setArticles(const std::list<Article>& articles) { // Pass by const reference
+void Order::setArticles(const std::list<Article>& articles) {
     this->articles = articles;
 }
 
@@ -49,8 +60,8 @@ void Order::setTotalCost(double totalCost) {
 
 //■■■■■■■■■ constructor ■■■■■■■■■//
 
-Order::Order(int id, const Client& client, const std::list<Article>& articles, double totalCost)
-    : id(id), client(client), articles(articles), totalCost(totalCost) { // Use initializer list
+Order::Order(int id, const Client& client, const Employee& employee, const std::list<Article>& articles, double totalCost)
+    : id(id), client(client), employee(employee), articles(articles), totalCost(totalCost) {
 }
 
 //■■■■■■■■■ destructor ■■■■■■■■■//

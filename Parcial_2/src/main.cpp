@@ -26,7 +26,7 @@ int main(int argc, char const *argv[])
         utils::getSelectedOptionFromUser(&optionSelected);
         utils::pauseConsole();
         utils::clearConsole();
-    } while (optionSelected != 8);
+    } while (optionSelected != 10);
     
     return 0;
 }

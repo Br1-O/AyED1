@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../../include/ArticleManager.hpp"
 #include "../../include/ClientManager.hpp"
+#include "../../include/EmployeeManager.hpp"
 #include "../../include/OrderManager.hpp"
 #include "../../include/Utils.hpp"
 
@@ -14,7 +15,7 @@ namespace utils
         const string title = "--- Cosmeticos La Pestana Ana ---";
         const string message = "- Por favor, ingrese el numero de la accion que desea realizar -";
 
-        const int numberOfOptions = 8;
+        const int numberOfOptions = 10;
         string menu[numberOfOptions] = 
         {
             "1. Visualizar el listado de pedidos.",
@@ -24,7 +25,9 @@ namespace utils
             "5. Visualizar el listado de articulos.",
             "6. Visualizar el listado de clientes.",
             "7. Buscar pedido de cliente.",
-            "8. Salir.",
+            "8. Visualizar el listado de empleados.",
+            "9. Agregar un nuevo empleado.",
+            "10. Salir.",
         };
 
         cout << title << endl;
@@ -118,9 +121,27 @@ namespace utils
             }
             break;
 
-            //exit the program
+            //display list of employees
             case 8:
-                *selectedOption = 8;
+            {            
+                clearConsole();
+
+                EmployeeManager::defaultEmployeeManager.displayEmployeeList();
+            }
+            break;
+
+            //search an order based on client's id
+            case 9:
+            {            
+                clearConsole();
+
+                EmployeeManager::defaultEmployeeManager.loadNewEmployee();
+            }
+            break;
+
+            //exit the program
+            case 10:
+                *selectedOption = 10;
             break;
             
             //invalid input
