@@ -32,11 +32,9 @@ ArticleManager::ArticleManager(list<Article*> articles){
 //■■■■■■■■■ destructor ■■■■■■■■■//
 
 ArticleManager::~ArticleManager(){
-    // for (auto& article: ArticleManager::defaultArticleManager.getArticles())
-    // {
-    //     delete article;
-    // }
-    // articles.clear();
+
+    //since my Manager classes are singletons, which are suppose to live through the whole app lifetime they don't implement a default destructor
+
 };
 
 //■■■■■■■■■ methods ■■■■■■■■■//
@@ -113,12 +111,12 @@ Article* ArticleManager::loadNewArticle(){
         //save it into manager class
         ArticleManager::defaultArticleManager.setNewArticles(newArticle);
 
-        cout << "¡Articulo agregado correctamente!" << endl;
+        cout << endl << "Articulo agregado correctamente." << endl;
     }
     catch(const std::exception& e)
     {
         std::cerr << e.what() << '\n';
-        cout << "¡No se ha podido crear el nuevo articulo por esta razon!";
+        cout << "No se ha podido crear el nuevo articulo por esta razon.";
         if(newArticle) delete newArticle;
     }
 

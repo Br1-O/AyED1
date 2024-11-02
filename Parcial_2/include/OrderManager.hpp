@@ -44,11 +44,13 @@
 
             std::list<Order*> getOrdersbyClientId(int id);
 
+            void displayActiveOrdersByClientId();
+
             Order* generateOrder(ClientManager clientManagerInstance = ClientManager::defaultClientManager, 
             ArticleManager articleManagerInstance = ArticleManager::defaultArticleManager, 
             EmployeeManager EmployeeManagerInstance = EmployeeManager::defaultEmployeeManager);
 
-            bool cancelOrder();
+            bool cancelOrder(int id);
 
             //■■■■■■■■■ default instance ■■■■■■■■■//
 

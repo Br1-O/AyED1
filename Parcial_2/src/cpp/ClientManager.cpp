@@ -36,11 +36,8 @@ ClientManager::ClientManager(
 
 ClientManager::~ClientManager(){
 
-    // for (auto& client: ClientManager::defaultClientManager.getClients())
-    // {
-    //     delete client;
-    // }
-    // clients.clear();
+    //since my Manager classes are singletons, which are suppose to live through the whole app lifetime they don't implement a default destructor
+
 };
 
 //■■■■■■■■■ methods ■■■■■■■■■//
@@ -84,7 +81,6 @@ Client ClientManager::getClientById(int id) {
     return foundClient;
 }
 
-
 Client* ClientManager::loadNewClient(){
 
     int id;
@@ -120,12 +116,12 @@ Client* ClientManager::loadNewClient(){
         //save it into manager class
         ClientManager::defaultClientManager.setNewClients(newClient);
 
-        cout << "¡Cliente agregado correctamente!" << endl;
+        cout << endl << "Cliente agregado correctamente." << endl;
     }
     catch(const std::exception& e)
     {
         std::cerr << e.what() << '\n';
-        cout << "¡No se ha podido crear el nuevo cliente por esta razon!";
+        cout << "No se ha podido crear el nuevo cliente por esta razon.";
         if(newClient) delete newClient;
     }
 

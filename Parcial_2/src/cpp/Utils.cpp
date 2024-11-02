@@ -24,8 +24,8 @@ namespace utils
             "4. Generar un nuevo pedido.",
             "5. Visualizar el listado de articulos.",
             "6. Visualizar el listado de clientes.",
-            "7. Buscar pedido de cliente.",
-            "8. Visualizar el listado de empleados.",
+            "7. Visualizar el listado de empleados.",
+            "8. Buscar pedido de cliente.",
             "9. Agregar un nuevo empleado.",
             "10. Salir.",
         };
@@ -101,63 +101,21 @@ namespace utils
             }
             break;
 
-            //search an order based on client's id
+            //display list of employees
             case 7:
             {            
                 clearConsole();
 
-                int clientId;
-
-                cout << "Ingrese el id del cliente para mostrar los pedidos activos: " << endl;
-
-                cin >> clientId;
-                cin.ignore();
-
-                if(OrderManager::defaultOrderManager.getOrdersbyClientId(clientId).size() > 0 )
-                {
-                    string lineSeparator =  "---------------------------------";
-
-                    cout << "Hay pedidos pendientes para el cliente."<< endl << endl;
-
-                    for (const auto& order: (OrderManager::defaultOrderManager.getOrdersbyClientId(clientId)))
-                    {
-
-                        cout << lineSeparator << endl;
-                        cout << "Orden: " << order->getId() << endl;
-
-                        cout << "Cliente: " << (order->getClient()).getName() << " " << (order->getClient()).getLastName() 
-                            << " - id: " << (order->getClient()).getId() << endl << endl;
-
-                        cout << "Empleado: " << (order->getEmployee()).getFirstName() << " " << (order->getEmployee()).getLastName() 
-                        << " - id: " << (order->getEmployee()).getId() << endl << endl;
-
-                        cout << "Pedido: " << endl;
-
-                        for (const auto article : order->getArticles())
-                        {
-                            cout << "> " << article.getName() << " - " << "Cantidad: " << article.getQuantity() << endl;
-                        }
-                        
-                        
-                        cout << endl << "Total: $" << order->getTotalCost() << endl;
-
-                        cout << lineSeparator << endl;
-                    }
-
-
-                }else{
-                    cout << "No hay pedidos pendientes para el cliente.";
-
-                }
+                EmployeeManager::defaultEmployeeManager.displayEmployeeList();
             }
             break;
 
-            //display list of employees
+            //search an order based on client's id
             case 8:
             {            
                 clearConsole();
 
-                EmployeeManager::defaultEmployeeManager.displayEmployeeList();
+                OrderManager::defaultOrderManager.displayActiveOrdersByClientId();
             }
             break;
 

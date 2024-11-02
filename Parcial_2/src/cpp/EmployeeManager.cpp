@@ -23,10 +23,8 @@ EmployeeManager::EmployeeManager(std::list<Employee*> employees) {
 //■■■■■■■■■ destructor ■■■■■■■■■//
 
 EmployeeManager::~EmployeeManager() {
-    // for (auto& employee : employees) {
-    //     delete employee;
-    // }
-    // employees.clear();
+    
+    //since my Manager classes are singletons, which are suppose to live through the whole app lifetime they don't implement a default destructor
 }
 
 //■■■■■■■■■ methods ■■■■■■■■■//
@@ -97,11 +95,11 @@ Employee* EmployeeManager::loadNewEmployee() {
         // Save it into manager class
         this->setNewEmployee(newEmployee);
 
-        std::cout << "¡Empleado agregado correctamente!" << std::endl;
+        std::cout << std::endl << "Empleado agregado correctamente." << std::endl;
     }
     catch (const std::exception& e) {
         std::cerr << e.what() << '\n';
-        std::cout << "¡No se ha podido crear el nuevo empleado por esta razón!" << std::endl;
+        std::cout << "No se ha podido crear el nuevo empleado por esta razon." << std::endl;
         if (newEmployee) delete newEmployee;
     }
 

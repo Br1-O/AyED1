@@ -40,10 +40,9 @@ list<Order*> orders)
 //■■■■■■■■■ destructor ■■■■■■■■■//
 
 OrderManager::~OrderManager(){
-    // for (auto& order : orders) {
-    //     delete order;
-    // };
-    // orders.clear();
+
+    //since my Manager classes are singletons, which are suppose to live through the whole app lifetime they don't implement a default destructor
+    
 };
 
 //■■■■■■■■■ methods ■■■■■■■■■//
@@ -99,11 +98,54 @@ list<Order*> OrderManager::getOrdersbyClientId(int id){
         if (id == ( (order->getClient()).getId()) )
         {
             foundOrders.push_back(order);
-            break;
         }
     }
 
     return foundOrders;
+};
+
+void OrderManager::displayActiveOrdersByClientId(){
+
+    int clientId;
+
+    cout << "Ingrese el id del cliente para mostrar los pedidos activos: " << endl;
+
+    cin >> clientId;
+    cin.ignore();
+
+    if(OrderManager::defaultOrderManager.getOrdersbyClientId(clientId).size() > 0 )
+    {
+        utils::clearConsole();
+
+        string lineSeparator =  "---------------------------------";
+
+        cout << "Hay pedidos pendientes para el cliente."<< endl << endl;
+
+        for (const auto& order: (OrderManager::defaultOrderManager.getOrdersbyClientId(clientId)))
+        {
+
+            cout << lineSeparator << endl;
+            cout << "Orden: " << order->getId() << endl;
+
+            cout << "Cliente: " << (order->getClient()).getName() << " " << (order->getClient()).getLastName() 
+                << " - id: " << (order->getClient()).getId() << endl << endl;
+
+            cout << "Empleado: " << (order->getEmployee()).getFirstName() << " " << (order->getEmployee()).getLastName() 
+            << " - id: " << (order->getEmployee()).getId() << endl << endl;
+
+            cout << "Pedido: " << endl;
+
+            for (const auto article : order->getArticles())
+            {
+                cout << "> " << article.getName() << " - " << "Cantidad: " << article.getQuantity() << endl;
+            }
+            
+            
+            cout << endl << "Total: $" << order->getTotalCost() << endl;
+
+            cout << lineSeparator << endl;
+        }
+    }
 };
 
 Order* OrderManager::generateOrder(ClientManager clientManagerInstance, ArticleManager articleManagerInstance, EmployeeManager EmployeeManagerInstance) {
@@ -117,7 +159,7 @@ Order* OrderManager::generateOrder(ClientManager clientManagerInstance, ArticleM
     std::cin >> clientId;
     std::cin.ignore();
 
-    // Fetch a copy of the client instead of a pointer
+    //fetch copy of the client's pointer
     Client clientCopy = clientManagerInstance.getClientById(clientId);
 
     if (clientCopy.getId() != 0) {
@@ -128,7 +170,7 @@ Order* OrderManager::generateOrder(ClientManager clientManagerInstance, ArticleM
         std::cin >> employeeId;
         std::cin.ignore();
 
-        // Fetch a copy of the client instead of a pointer
+        //fetch copy of the employee's pointer
         Employee employeeCopy = EmployeeManagerInstance.getEmployeeById(employeeId);
 
         if (employeeCopy.getId() != 0)
@@ -136,9 +178,10 @@ Order* OrderManager::generateOrder(ClientManager clientManagerInstance, ArticleM
             utils::clearConsole();
 
             std::cout << "Ingrese el id de los productos a incluir en el pedido." << std::endl;
-            std::cout << "Para terminar, ingrese: 0" << std::endl;
 
             do {
+                std::cout << "Para completar la carga del pedido, ingrese: 0" << std::endl << std::endl;
+
                 std::cout << "Ingrese el id del producto: " << std::endl;
                 std::cin >> articleId;
                 std::cin.ignore();
@@ -151,17 +194,23 @@ Order* OrderManager::generateOrder(ClientManager clientManagerInstance, ArticleM
                     std::cin.ignore();
 
                     try {
-                        // Use a deep copy of the article with updated quantity
+                        utils::clearConsole();
+
+                        //deep copy of article with quantity changed based on the order
                         articleCopy.setQuantity(productUnits);
                         articles.push_back(articleCopy);
 
-                        std::cout << "Producto agregado correctamente!" << std::endl;
+                        std::cout << std::endl << "Producto agregado correctamente." << std::endl;
+
                     } catch (const std::exception& e) {
                         std::cerr << e.what() << '\n';
-                        std::cout << "No se pudo agregar el producto debido a un error." << std::endl;
+                        std::cout << std::endl << "No se pudo agregar el producto debido a un error." << std::endl;
+                        
                     }
                 } else if (articleId != 0) {
-                    std::cout << "Producto no encontrado. Revise el id ingresado." << std::endl;
+                    
+                    std::cout << std::endl << "Producto no encontrado. Revise el id ingresado." << std::endl;
+
                 }
             } while (articleId != 0);
 
@@ -182,20 +231,20 @@ Order* OrderManager::generateOrder(ClientManager clientManagerInstance, ArticleM
                 OrderManager::defaultOrderManager.setNewOrders(newOrder);
 
                 std::cout << "Orden agregada correctamente, con id: " << newOrder->getId() << std::endl;
+
             } catch (const std::exception& e) {
                 std::cerr << e.what() << '\n';
                 std::cout << "No se pudo crear la orden." << std::endl;
                 delete newOrder;
+
             }
         }
-        
-
     }
 
     return newOrder;
 }
 
-bool OrderManager::cancelOrder(){
+bool OrderManager::cancelOrder(int id){
     return false;
 };
 
