@@ -19,17 +19,18 @@ class Meat {
         int currentStorageShelf; // Corrected member for storage shelf
 
     public:
-        // Default constructor
+        //default constructor
         Meat() 
             : id(0), buyingPrice(0.0), storageTemperature(4), temperatureUnit('C'), amountInStock(0.0), 
               supplier(0), currentStorageShelf(0) {} // Default value for storage shelf
 
-        // Parameterized constructor
-        Meat(int id, double buyPrice, const std::string& cut, int temp, char unit, double stock, 
-             const Date& buyDate, const Date& expireDate, int supp, int shelf) // Added shelf parameter
-            : id(id), buyingPrice(buyPrice), typeOfMeatCut(cut), storageTemperature(temp), 
-              temperatureUnit(unit), amountInStock(stock), buyingDate(buyDate), expiringDate(expireDate), 
-              supplier(supp), currentStorageShelf(shelf) {} // Initialize storage shelf
+        //unified constructor for all meat types
+        Meat(int id, double buyingPrice, const std::string& typeOfMeatCut, int storageTemperature, 
+            char temperatureUnit, double amountInStock, const Date& buyingDate, const Date& expiringDate, 
+            int supplier, int currentStorageShelf)
+            : id(id), buyingPrice(buyingPrice), typeOfMeatCut(typeOfMeatCut), storageTemperature(storageTemperature),
+            temperatureUnit(temperatureUnit), amountInStock(amountInStock), buyingDate(buyingDate), 
+            expiringDate(expiringDate), supplier(supplier), currentStorageShelf(currentStorageShelf) {}
 
         // Destructor
         virtual ~Meat() {}
@@ -61,8 +62,18 @@ class Meat {
         // Pure virtual function for calculating shelf life
         virtual int calculateShelfLife() const = 0; //inDays
 
-        // Pure virtual function for displaying info
-        virtual void displayInfo() const = 0; 
+        // virtual function for displaying info
+        virtual void displayInfo() const{
+            std::cout << "id: " << id << std::endl;
+            std::cout << "Tipo de carne: " << typeOfMeatCut << std::endl;
+            std::cout << "Precio de Compra: $ " << buyingPrice << std::endl;
+            std::cout << "Temperatura de Almacenamiento: " << storageTemperature << " " << temperatureUnit << std::endl;
+            std::cout << "Cantidad en Stock: " << amountInStock << " kg" << std::endl;
+            std::cout << "Almacenado en el area: " << currentStorageShelf << std::endl;
+            std::cout << "Fecha de Compra: " << buyingDate.toString() << std::endl;
+            std::cout << "Fecha de Vencimiento: " << expiringDate.toString() << std::endl;
+            std::cout << "Proveedor: " << supplier << std::endl;
+        }; 
 };
 
 #endif // MEAT_HPP

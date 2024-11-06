@@ -6,11 +6,14 @@
 
     class MeatProduct : public Article {
     private:
-        Meat* typeOfMeat;                    // Pointer to a Meat object (composition)
+        Meat* typeOfMeat;                    //pointer to a Meat object (composition)
         float relationOfPortionWithRawMaterial;
 
     public:
-        MeatProduct(std::string name, double price, int unitsInStock, Meat* typeOfMeat, float relationOfPortionWithRawMaterial);
+        MeatProduct();
+
+        //constructor that takes meat pointer as parameter
+        MeatProduct(int id, std::string name, double price, int unitsInStock, Meat* typeOfMeat, float relationOfPortionWithRawMaterial);
 
         // Getters
         Meat* getTypeOfMeat() const;
@@ -19,6 +22,9 @@
         // Setters
         void setTypeOfMeat(Meat* meat);
         void setRelationOfPortionWithRawMaterial(float relation);
+
+        //methods
+        void displayInfo() const override;
     };
 
 #endif // MEATPRODUCT_HPP

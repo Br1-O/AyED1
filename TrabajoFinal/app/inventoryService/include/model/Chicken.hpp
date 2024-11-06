@@ -6,39 +6,21 @@
 
 class Chicken : public Meat {
 private:
-    int weightClass;
-    bool isOrganic;
-    bool isFreeRange;
-    bool isAntibioticFree;
-    Date processedDate;
+    char chickenClass; // A, B, C
 
 public:
     Chicken();
 
-    // Constructor not detailed
+    // Constructor using all Meat properties
     Chicken(int id, double buyingPrice, const std::string& typeOfMeatCut, int storageTemperature, 
-            char temperatureUnit, double amountInStock, const Date& buyingDate, const Date& expiringDate, 
-            int supplier, int currentStorageShelf, const Date& processedDate);
+            char temperatureUnit, double amountInStock, const Date& buyingDate, 
+            const Date& expiringDate, int supplier, int currentStorageShelf, char chickenClass);
 
-    // Constructor detailed
-    Chicken(int id, double buyingPrice, const std::string& typeOfMeatCut, int storageTemperature, 
-            char temperatureUnit, double amountInStock, const Date& buyingDate, const Date& expiringDate, 
-            int supplier, int currentStorageShelf, int weightClass, bool isOrganic, bool isFreeRange, 
-            bool isAntibioticFree, const Date& processedDate);
+    // Getter for clase
+    char getChickenClass() const;
 
-    // Getters
-    int getWeightClass() const;
-    bool getIsOrganic() const;
-    bool getIsFreeRange() const;
-    bool getIsAntibioticFree() const;
-    Date getProcessedDate() const;
-
-    // Setters
-    void setWeightClass(int wc);
-    void setIsOrganic(bool organic);
-    void setIsFreeRange(bool freeRange);
-    void setIsAntibioticFree(bool antibioticFree);
-    void setProcessedDate(const Date& date);
+    // Setter for clase
+    void setChickenClass(char c);
 
     // Override abstract methods
     void displayInfo() const override;

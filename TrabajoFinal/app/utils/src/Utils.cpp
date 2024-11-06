@@ -3,6 +3,7 @@
 #include "../../businessService/include/controller/ClientManager.hpp"
 #include "../../businessService/include/controller/EmployeeManager.hpp"
 #include "../../businessService/include/controller/OrderManager.hpp"
+#include "../../inventoryService/include/controller/MeatManager.hpp"
 #include "../include/Utils.hpp"
 #include "../include/FileHandler.hpp"
 
@@ -128,33 +129,14 @@ namespace utils
             case 11:
                 clearConsole();
 
-                FileHandler::defaultFileHandler.saveDataIntoFile();
+                MeatManager::defaultMeatManager.displayInventoryList();
             break;
 
-            //display list of meat products inventory
+            //add new meat stock into meat inventory
             case 12:
                 clearConsole();
 
-                FileHandler::defaultFileHandler.saveDataIntoFile();
-            break;
-
-            //load a new manufacturation of a meat product
-            case 13:
-                clearConsole();
-
-                FileHandler::defaultFileHandler.saveDataIntoFile();
-            break;
-
-            //load a new re stock of meat materials
-            case 14:
-                clearConsole();
-
-                FileHandler::defaultFileHandler.saveDataIntoFile();
-            break;
-
-            //load a new type of meat
-            case 15:
-                clearConsole();
+                MeatManager::defaultMeatManager.loadNewItem();
 
                 FileHandler::defaultFileHandler.saveDataIntoFile();
             break;

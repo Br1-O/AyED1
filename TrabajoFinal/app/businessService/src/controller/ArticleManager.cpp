@@ -1,9 +1,13 @@
 #include <iostream>
 #include <string>
 #include <list>
+#include <sstream>
 #include "../../include/model/Article.hpp"
 #include "../../include/controller/ArticleManager.hpp"
 #include "../../../utils/include/Utils.hpp"
+
+#include "../../../inventoryService/include/model/MeatProduct.hpp"
+#include "../../../inventoryService/include/controller/MeatManager.hpp"
 
 using namespace std;
 
@@ -51,10 +55,10 @@ void ArticleManager::displayArticleList() const {
     for (const auto &article :currentArticles)
     {
         cout << lineSeparator << endl;
-        cout << "Id: " << article->getId() << endl;
-        cout << "Nombre: " << article->getName() << endl;
-        cout << "Producto: " << article->getPrice() << endl;
-        cout << "Unidades en stock: " << article->getUnitsInStock() << endl;
+
+        //apply polimorph to display article info
+        article->displayInfo();
+
         cout << lineSeparator << endl;
     }
 
@@ -78,23 +82,52 @@ Article ArticleManager::getArticleById(int id) {
 
 Article* ArticleManager::loadNewArticle(){
 
+    int isMeatProduct = 0;
+
     int id, unitsInStock;
     string name;
     double price; 
 
+    int meatId;
+    string relationOfPortionWithRawMaterialInput;
+    float relationOfPortionWithRawMaterial = 1.0; //temporarily hardcoded
+
     Article* newArticle = nullptr;
 
-    cout << "Por favor, ingrese el nombre del nuevo articulo: " << endl;
-    getline(cin, name);
-
-    cout << "Ingrese el precio de venta del articulo por unidad: " << endl;
-    cin >> price;
+    cout << "El producto a ingresar es una carne o un derivado carnico?" << endl << " 0 = No | 1 = Si  " << endl;
+    cin >> isMeatProduct;
     cin.ignore();
 
-    cout << "Ingrese la cantidad de unidades en Stock actualmente: " << endl;
-    cin >> unitsInStock;
-    cin.ignore();
+    if (isMeatProduct == 1)
+    {      
+        cout << "Por favor, ingrese el nombre del nuevo producto: " << endl;
+        getline(cin, name);
 
+        cout << "Ingrese el precio de venta del producto por kg: " << endl;
+        cin >> price;
+        cin.ignore();
+
+        cout << "Ingrese la cantidad en Stock actualmente: (en kg, sin decimales)" << endl;
+        cin >> unitsInStock;
+        cin.ignore();
+
+        cout << "Ingrese el id del tipo de carne a usarse para crear este producto: " << endl;
+        cin >> meatId;
+        cin.ignore();
+    }else
+    {
+        cout << "Por favor, ingrese el nombre del nuevo articulo: " << endl;
+        getline(cin, name);
+
+        cout << "Ingrese el precio de venta del articulo por unidad: " << endl;
+        cin >> price;
+        cin.ignore();
+
+        cout << "Ingrese la cantidad de unidades en Stock actualmente:" << endl;
+        cin >> unitsInStock;
+        cin.ignore();
+    }
+    
     try
     {
         //create new id
@@ -105,8 +138,18 @@ Article* ArticleManager::loadNewArticle(){
         :
         ((currentArticles.back())->getId()) + 1;
 
-        //generate new article
-        newArticle = new Article(id, name, price, unitsInStock);
+        if (isMeatProduct == 1)
+        {
+            //get meat from meat list
+            Meat* meat = MeatManager::defaultMeatManager.getItemById(meatId);
+
+            //generate new meat product
+            newArticle = new MeatProduct(id, name, price, unitsInStock, meat, relationOfPortionWithRawMaterial);
+
+        }else{
+            //generate new article
+            newArticle = new Article(id, name, price, unitsInStock);
+        }
 
         //save it into manager class
         ArticleManager::defaultArticleManager.setNewArticles(newArticle);

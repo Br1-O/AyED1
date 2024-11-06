@@ -3,33 +3,21 @@
 
 #include "Meat.hpp"
 
-enum class SmokingLevel { NONE, LIGHT, HEAVY }; // Example smoking level enumeration
-
 class Pork : public Meat {
 private:
-    std::string butcherDate;
-    std::string breedType;
-    bool isHeritageBreed;
-    SmokingLevel smokingLevel;
-    bool isCured;
+    int breedType;
 
 public:
-    Pork(std::string cut, int temp, char unit, double stock, std::string butcherDate, 
-         std::string breedType, bool isHeritageBreed, SmokingLevel smokingLevel, bool isCured);
+    // Constructor using Meat properties plus breedType
+    Pork(int id, double buyingPrice, const std::string& typeOfMeatCut, int storageTemperature, 
+         char temperatureUnit, double amountInStock, const Date& buyingDate, 
+         const Date& expiringDate, int supplier, int currentStorageShelf, int breedType);
 
-    // Getters
-    std::string getButcherDate() const;
-    std::string getBreedType() const;
-    bool getIsHeritageBreed() const;
-    SmokingLevel getSmokingLevel() const;
-    bool getIsCured() const;
+    // Getter
+    int getBreedType() const;
 
-    // Setters
-    void setButcherDate(const std::string& date);
-    void setBreedType(const std::string& breed);
-    void setIsHeritageBreed(bool heritage);
-    void setSmokingLevel(SmokingLevel level);
-    void setIsCured(bool cured);
+    // Setter
+    void setBreedType(const int& breed);
 
     // Override abstract methods
     void displayInfo() const override;

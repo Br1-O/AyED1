@@ -64,3 +64,13 @@ Article::Article(int id, const std::string& name, double price, int unitsInStock
 //■■■■■■■■■ destructor ■■■■■■■■■//
 
 Article::~Article() {}
+
+//■■■■■■■■■ methods ■■■■■■■■■//
+
+void Article::displayInfo() const{
+    std::cout << "Id: " << this->getId() << std::endl;
+    std::cout << "Nombre: " << this->getName() << std::endl;
+    std::cout << "Producto: " << this->getPrice() << std::endl;
+    std::cout << "Cantidad en stock: " << this->getUnitsInStock() << std::endl;
+};
+

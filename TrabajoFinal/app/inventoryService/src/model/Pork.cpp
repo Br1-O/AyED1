@@ -1,32 +1,36 @@
 #include "../../include/model/Pork.hpp"
 #include <iostream>
 
-Pork::Pork(std::string cut, int temp, char unit, double stock, std::string butcherDate, 
-           std::string breedType, bool isHeritageBreed, SmokingLevel smokingLevel, bool isCured)
-    : Meat(cut, temp, unit, stock), butcherDate(butcherDate), breedType(breedType), 
-      isHeritageBreed(isHeritageBreed), smokingLevel(smokingLevel), isCured(isCured) {}
+// Constructor using Meat properties plus breedType
+Pork::Pork(int id, double buyingPrice, const std::string& typeOfMeatCut, int storageTemperature, 
+           char temperatureUnit, double amountInStock, const Date& buyingDate, 
+           const Date& expiringDate, int supplier, int currentStorageShelf, int breedType)
+    : Meat(id, buyingPrice, typeOfMeatCut, storageTemperature, temperatureUnit, amountInStock, 
+           buyingDate, expiringDate, supplier, currentStorageShelf), breedType(breedType)
+{
+}
 
-// Getters
-std::string Pork::getButcherDate() const { return butcherDate; }
-std::string Pork::getBreedType() const { return breedType; }
-bool Pork::getIsHeritageBreed() const { return isHeritageBreed; }
-SmokingLevel Pork::getSmokingLevel() const { return smokingLevel; }
-bool Pork::getIsCured() const { return isCured; }
+// Getter for breedType
+int Pork::getBreedType() const {
+    return breedType;
+}
 
-// Setters
-void Pork::setButcherDate(const std::string& date) { butcherDate = date; }
-void Pork::setBreedType(const std::string& breed) { breedType = breed; }
-void Pork::setIsHeritageBreed(bool heritage) { isHeritageBreed = heritage; }
-void Pork::setSmokingLevel(SmokingLevel level) { smokingLevel = level; }
-void Pork::setIsCured(bool cured) { isCured = cured; }
+// Setter for breedType
+void Pork::setBreedType(const int& breed) {
+    breedType = breed;
+}
 
+// Example of overriding displayInfo method
 void Pork::displayInfo() const {
-    std::cout << "Pork Cut: " << typeOfMeatCut << ", Breed: " << breedType 
-              << ", Heritage Breed: " << isHeritageBreed << ", Smoking Level: " 
-              << static_cast<int>(smokingLevel) << ", Cured: " << isCured 
-              << ", Butcher Date: " << butcherDate << std::endl;
+
+    Meat::displayInfo(); 
+
+    std::cout << "Tipo de Raza: " << breedType << std::endl; 
 }
 
 int Pork::calculateShelfLife() const {
-    return (storageTemperature < 4) ? (isCured ? 14 : 5) : 3;
+    if (breedType == 1) {
+        return 7; // 7 days shelf life
+    }
+    return 5; // 5 days shelf life   
 }

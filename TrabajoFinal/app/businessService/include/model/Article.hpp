@@ -57,6 +57,10 @@ public:
     //■■■■■■■■■ destructor ■■■■■■■■■//
 
     ~Article();
+
+    //■■■■■■■■■ methods ■■■■■■■■■//.
+
+    virtual void displayInfo() const;
 };
 
 #endif // ARTICLE_HPP

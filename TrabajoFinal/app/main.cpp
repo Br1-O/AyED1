@@ -5,6 +5,7 @@
 
 //use for easy data handling testing
 //#include "businessService/resources/data/dataExample.hpp"
+#include "inventoryService/resources/data/dataInventoryExample.hpp"
 
 //■■■■■■ Menu building ■■■■■■//
 
@@ -15,10 +16,10 @@ const int numberOfOptionsBusiness = 10;
 std::string menuBusiness[numberOfOptionsBusiness] = 
 {
     "1. Visualizar el listado de pedidos.",
-    "2. Agregar un nuevo articulo.",
+    "2. Agregar un nuevo producto.",
     "3. Agregar un nuevo cliente.",
     "4. Generar un nuevo pedido.",
-    "5. Visualizar el listado de articulos.",
+    "5. Visualizar el listado de productos.",
     "6. Visualizar el listado de clientes.",
     "7. Visualizar el listado de empleados.",
     "8. Buscar pedido de cliente.",
@@ -26,17 +27,14 @@ std::string menuBusiness[numberOfOptionsBusiness] =
     "10. Salir."
 };
 
-const std::string titleInventory = "--- Gestion de inventario: ---";
+const std::string titleInventory = "--- Gestion de inventario de carnes: ---";
 const std::string messageInventory = " ";
 
-const int numberOfOptionsInventory = 5;
+const int numberOfOptionsInventory = 2;
 std::string menuInventory[numberOfOptionsInventory] = 
 {           
     "11. Visualizar el listado de inventario de carnes.",
-    "12. Visualizar el listado de inventario de productos.",
-    "13. Agregar una manufacturacion de producto carnico.",
-    "14. Agregar re stock de carne.",
-    "15. Agregar un nuevo tipo de carne.",
+    "12. Agregar re stock de carne.",
 };
 
 //■■■■■■ Main ■■■■■■//
@@ -44,6 +42,8 @@ std::string menuInventory[numberOfOptionsInventory] =
 int main(int argc, char const *argv[])
 {
     int optionSelected = 0;
+
+    dataInventoryExample::loadData();
 
     if((FileHandler::defaultFileHandler).loadDataFromFile()){
         do

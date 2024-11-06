@@ -189,7 +189,7 @@ Order* OrderManager::generateOrder(ClientManager clientManagerInstance, ArticleM
                 Article articleCopy = articleManagerInstance.getArticleById(articleId);
 
                 if (articleCopy.getId() != 0) {
-                    std::cout << "Ingrese la cantidad de unidades del producto: " << std::endl;
+                    std::cout << "Ingrese la cantidad del producto: "  << std::endl << "(en kg para productos carnicos | en unidades para productos envasados)" << std::endl;
                     std::cin >> productUnits;
                     std::cin.ignore();
 
