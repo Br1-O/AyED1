@@ -48,11 +48,6 @@ namespace dataInventoryExample
             ArticleManager::defaultArticleManager.setNewArticles(newArticle2);
             ArticleManager::defaultArticleManager.setNewArticles(newArticle3);
 
-
-            std::cout << "¡Listado agregado correctamente!" << std::endl << std::endl;
-
-            std::cout << "Articulos cargados: " << ArticleManager::defaultArticleManager.getArticles().size() << std::endl;
-
         }
         catch(const std::exception& e)
         {

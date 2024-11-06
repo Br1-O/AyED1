@@ -9,7 +9,7 @@
 
 //■■■■■■ Menu building ■■■■■■//
 
-const std::string title = "--- El carnero testarudo - Boutique de carnes ---";
+const std::string title = "--- Ukelele Chicken - Boutique de carnes ---";
 const std::string message = "- Por favor, ingrese el numero de la accion que desea realizar -";
 
 const int numberOfOptionsBusiness = 10;
