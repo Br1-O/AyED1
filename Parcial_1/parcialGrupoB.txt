@@ -1,0 +1,33 @@
+Marco Teórico:
+1. ¿Qué es la Modularizacion y que permite?
+2. Describir los conceptos de Dominio del Problema y Dominio de la Solución,
+relacionarlo con Gap Semántico e Isomorfismo Estructural
+
+1.La modularización consiste en la división del programa en bloques de código más pequeño en base a algún tipo de funcionalidad al que este bloque responda. 
+Así se permite la reutilización de dicho bloque de código en el programa, facilita el depuramiento de errores y mejora la legibilidad al evitarse reescribir código innecesariamente.
+
+2. El dominio del problema da cuenta al rango de valores que abarca el problema, mientras que el dominio de la solución es el rango de valores que podrá retornar la implementación de dicha solución, mientras más cercano esté uno del otro la implementación del código será más cercana a ser una correcta solución del problema.
+De igual forma el gap semántico es aquella división que existe entre la interpretación del problema y la implementación en el código del programa que intenta reflejarlo y resolverlo, 
+así será conveniente que dicha división sea lo más pequeña posible, para que el problema se vea correctamente reflejado en el programa y su solución sea lo más cercana a la naturaleza misma del problema.
+Facilitando la disminución de dicho gap semántico, el isomorfismo estructural da cuenta a la igualdad en la estructura de la implementación de la solución en el problema y la naturaleza del problema, así, por ejemplo, si el problema a resolver fuera el listado de alumnos de una institución, una buena forma sería implementar una estructura de tipo "struct", donde se reflejen los datos de dichos alumnos, definiéndolo como un tipo de dato para luego usar un array donde dichos alumnos sean almacenados (que equivaldría al curso o institución). 
+Estas estructuras en la implementación reflejan la naturaleza del conjunto alumnos y sus atributos, manteniendo dicho isomorfismo estructural, facilitando la solución del problema.
+
+
+Marco Practico
+Una Empresa que realiza Servicios de Limpieza de Tapizados “Beauty-Sand” nos convoca para la
+realización de una App que permita registrar los Pedidos de Embellecimiento de los Autos.
+En esta etapa del desarrollo, solo deberemos realizar el módulo “Solicitudes”
+La misma debe permitir:
+1. Gestionar las Solicitudes
+a. Dar de alta la Solicitud (el código de la Solicitud es BT-500, BT-501… , se
+incrementa de a 1 con cada nuevo registro ). Campos: ID, Apellido y Nombre,
+Monto a pagar)
+b. Dar de Baja las Solicitudes x código de Solicitud (Ej: BT-504).
+c. Modificar las Solicitudes, ingresar el código, mostrarlo y editarlo.
+2. Listar las solicitudes.
+a. Listar todas las Solicitudes.
+b. Buscar unas Solicitud x código (Ej: BT-501) y mostrarla (imprimir cartel de no
+encontrado).
+
+3. Todo esto mediante un Menú, Modularizando en Funciones, utilizando Archivos, arreglos y
+estructuras.
