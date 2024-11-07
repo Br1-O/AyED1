@@ -1,0 +1,3 @@
+Comandos de compilacion :
+
+g++ -Iinclude src/*.cpp main.cpp -o output/main.exe
