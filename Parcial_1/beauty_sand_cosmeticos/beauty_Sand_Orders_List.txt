@@ -1,4 +1,6 @@
 BT-500 bruno ortu¤o 5000
-BT-502 Juan Ortuno 1000
+BT-502 Bruno Ortuno 1000
 BT-503 Carlos Perez 20000
+BT-504 dsddf dsfsdf 2
+BT-506 sadasdsad asddas 4545
 END_OF_FILE
