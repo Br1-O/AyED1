@@ -125,6 +125,7 @@ Article* ArticleManager::loadNewArticle(){
     return newArticle;
 };
 
+
 //■■■■■■■■■ default instance ■■■■■■■■■//
 
 ArticleManager ArticleManager::defaultArticleManager;

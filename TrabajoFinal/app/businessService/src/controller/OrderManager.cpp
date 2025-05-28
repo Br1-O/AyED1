@@ -1,6 +1,7 @@
 #include <iostream>
 #include <list>
 #include <string>
+#include <algorithm>
 #include "../../include/model/Order.hpp"
 #include "../../include/model/Article.hpp"
 #include "../../include/controller/OrderManager.hpp"
@@ -193,15 +194,37 @@ Order* OrderManager::generateOrder(ClientManager clientManagerInstance, ArticleM
                     std::cin >> productUnits;
                     std::cin.ignore();
 
+                    Article* article = articleManagerInstance.getArticlePointerById(articleId);
+
                     try {
                         utils::clearConsole();
 
-                        //deep copy of article with quantity changed based on the order
-                        articleCopy.setQuantity(productUnits);
-                        articles.push_back(articleCopy);
+                        int newInventoryForProduct = article->getUnitsInStock() - productUnits;
+                        
+                        if (newInventoryForProduct < 0)
+                        {
+                            std::cout << std::endl << "No hay suficiente cantidad en el inventario. Unidades actuales en inventario: " << 
+                            articleManagerInstance.getArticleById(articleId).getUnitsInStock() << std::endl;
+                        }
+                        else
+                        {
+                            //deep copy of article with quantity changed based on the order
+                            articleCopy.setQuantity(productUnits);
+                            
+                            auto it = std::find_if(articles.begin(), articles.end(), [&articleCopy](const Article& article) {
+                                return article.getId() == articleCopy.getId();
+                            });
+                            
+                            if (it != articles.end()) {
+                                it->setQuantity(it->getQuantity() + productUnits);
+                            } else {
+                                articles.push_back(articleCopy);
+                            }
 
-                        std::cout << std::endl << "Producto agregado correctamente." << std::endl;
+                            article->setUnitsInStock(newInventoryForProduct);
 
+                            std::cout << std::endl << "Producto agregado correctamente." << std::endl;
+                        }
                     } catch (const std::exception& e) {
                         std::cerr << e.what() << '\n';
                         std::cout << std::endl << "No se pudo agregar el producto debido a un error." << std::endl;

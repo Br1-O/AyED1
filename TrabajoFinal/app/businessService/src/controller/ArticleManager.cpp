@@ -166,6 +166,19 @@ Article* ArticleManager::loadNewArticle(){
     return newArticle;
 };
 
+Article* ArticleManager::getArticlePointerById(int id)
+{
+    Article* foundArticle = nullptr;
+    const auto& currentArticles = ArticleManager::defaultArticleManager.getArticles();
+    
+    for (const auto& article : currentArticles) {
+        if (id == article->getId()) {
+            foundArticle = article;
+        }
+    }
+    
+    return foundArticle;
+}
 //■■■■■■■■■ default instance ■■■■■■■■■//
 
 ArticleManager ArticleManager::defaultArticleManager;

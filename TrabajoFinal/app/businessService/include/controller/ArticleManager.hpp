@@ -39,6 +39,8 @@
             
             Article getArticleById(int id);
 
+            Article* getArticlePointerById(int id);
+
             Article* loadNewArticle();
 
             //■■■■■■■■■ default instance ■■■■■■■■■//
