@@ -1,3 +1,6 @@
+#ifndef EMPLOYEE_PROFESSIONAL_HPP
+#define EMPLOYEE_PROFESSIONAL_HPP
+
 #include <iostream>
 #include "IEmployee.hpp"
 
@@ -15,3 +18,5 @@ public:
     void work() override;
 
 };
+
+#endif

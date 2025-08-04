@@ -114,7 +114,7 @@
                 <mxCell id="79" value="&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;&lt;b&gt;Notificator&lt;/b&gt;&lt;/span&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
                     <mxGeometry x="520" y="600" width="220" height="140" as="geometry"/>
                 </mxCell>
-                <mxCell id="80" value="&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;- message : str&lt;/span&gt;&lt;div&gt;- receptor : IEmployee*&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="79" vertex="1">
+                <mxCell id="80" value="&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;- message : str&lt;/span&gt;&lt;div&gt;- receiver : IEmployee*&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="79" vertex="1">
                     <mxGeometry y="40" width="220" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="81" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="79" vertex="1">
