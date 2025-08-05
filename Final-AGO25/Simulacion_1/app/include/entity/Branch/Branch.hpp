@@ -3,32 +3,29 @@
 
 #include <iostream>
 #include <list>
-#include "../Employee/IEmployee.hpp"
+
+class IEmployee;
 
 class Branch
 {
 private:
-    string code;
-    string name;
-    std::list<IEmployee*> employees = {nullptr};
+    std::string code = "1";
+    std::string name = "Pinamar";
+    std::list<IEmployee*> employees;
 
 public:
-    Branch(string code, string name);
-    Branch();
+    Branch(std::string code, std::string name);
     ~Branch();
 
 //■■■■■■■■■■ Getters ■■■■■■■■■■//
-    string getCode();
-    string getName();
+    std::string getCode();
+    std::string getName();
     std::list<IEmployee*> getEmployees();
 
 //■■■■■■■■■■ Setters ■■■■■■■■■■//
-    void setCode(string code);
-    void setName(string name);
+    void setCode(std::string code);
+    void setName(std::string name);
     void setEmployees(std::list<IEmployee*> employees);
-
-//■■■■■■■■■■ Methods ■■■■■■■■■■//
-    string toString();
 };
 
 #endif

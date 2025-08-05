@@ -1,8 +1,8 @@
-#include "app/include/entity/Branch/Branch.hpp"
-#include "app/include/repository/Repository.hpp"
-#include "app/include/entity/Notificator/Notificator.hpp"
-#include "app/include/service/EmployeeBranchService.hpp"
-#include "app/include/entity/Notificator/Notificator.hpp"
+#include <iostream>
+#include "./include/entity/Branch/Branch.hpp"
+#include "./include/repository/Repository.hpp"
+#include "./include/entity/Notificator/Notificator.hpp"
+#include "./include/service/EmployeeBranchService.hpp"
 
 int main() {
 
@@ -19,6 +19,8 @@ int main() {
 
     EmployeeBranchService* EBService = new EmployeeBranchService(EBRepository, cmdNotificator);
 
+    std::cout << "Por favor, ingrese 3 empleados: \n" << std::endl;
+
     for (size_t i = 0; i < 3; i++)
     {
         EBService->addEmployee();
@@ -30,6 +32,7 @@ int main() {
 
     EBService->sendMessageToOne();
     EBService->sendMessageToBranch();
+    EBService->sendMessageToAll();
     EBService->sendMessageToAll();
 
     delete branch1;

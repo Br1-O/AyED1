@@ -1,54 +1,31 @@
-#ifndef BRANCH_HPP
-#define BRANCH_HPP
-
 #include <iostream>
 #include <list>
+#include "../../../include/entity/Branch/Branch.hpp"
 #include "../../../include/entity/Employee/IEmployee.hpp"
 
-class Branch
-{
-private:
-    string code = "0";
-    string name = "Pinamar";
-    std::list<IEmployee*> employees = {nullptr};
+using namespace std;
 
-public:
-    Branch(string code, string name):
-    code(code), name(name){}
-    Branch(){}
-    ~Branch(){}
+Branch::Branch(string code, string name):code(code), name(name), employees() {}
+Branch::~Branch(){}
 
 //■■■■■■■■■■ Getters ■■■■■■■■■■//
-    string getCode(){
-        return this->code;
-    }
-    string getName(){
-        return this->name;
-    } 
-    std::list<IEmployee*> getEmployees(){
-        return this->employees;
-    }
+string Branch::getCode(){
+    return this->code;
+}
+string Branch::getName(){
+    return this->name;
+} 
+list<IEmployee*> Branch::getEmployees(){
+    return this->employees;
+}
 
 //■■■■■■■■■■ Setters ■■■■■■■■■■//
-    void setCode(string code){
-        this->code = code;
-    }
-    void setName(string name){
-        this->name = name;
-    }
-    void setEmployees(std::list<IEmployee*> employees){
-        this->employees = employees;
-    }
-
-//■■■■■■■■■■ Methods ■■■■■■■■■■//
-    string toString(){
-        string fullData = 
-        "Código: " + this->getCode() + "\n " +
-        "Nombre: " + this->getName() + "\n" +
-        "Empleados: " + "\n";
-
-        return fullData;
-    }
-};
-
-#endif
+void Branch::setCode(string code){
+    this->code = code;
+}
+void Branch::setName(string name){
+    this->name = name;
+}
+void Branch::setEmployees(list<IEmployee*> employees){
+    this->employees = employees;
+}

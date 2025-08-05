@@ -2,46 +2,44 @@
 #define IEMPLOYEE_HPP
 
 #include <iostream>
-#include "../Branch/Branch.hpp"
 
-using namespace std;
+class Branch;
 
 class IEmployee
 {
 private:
-    string code = "1";
-    string name = "-";
-    string lastname = "-";
+    std::string code = "1";
+    std::string name = "-";
+    std::string lastname = "-";
     double salary = 0.0;
     Branch* branch;
 
 protected:
-    string type = "-";
+    std::string type = "-";
     
 public:
     IEmployee(std::string name, std::string lastname, double salary, Branch* branch);
-    IEmployee();
     ~IEmployee();
 
 //■■■■■■■■■■ Getters ■■■■■■■■■■//
-    string getCode();
-    string getName();
-    string getLastname();
+    std::string getCode();
+    std::string getName();
+    std::string getLastname();
     double getSalary();
-    string getType();
+    std::string getType();
     Branch* getBranch();
 
 //■■■■■■■■■■ Setters ■■■■■■■■■■//
-    void setCode(string code);
-    void setName(string name);
-    void setLastname(string lastname);
+    void setCode(std::string code);
+    void setName(std::string name);
+    void setLastname(std::string lastname);
     void setSalary(double salary);
     void setBranch(Branch* branch);
 
 //■■■■■■■■■■ Methods ■■■■■■■■■■//
     virtual void work() = 0;
-    virtual void getNotification(string message) = 0;
-    string toString();
+    virtual void getNotification(std::string message) = 0;
+    std::string toString();
 };
 
 #endif

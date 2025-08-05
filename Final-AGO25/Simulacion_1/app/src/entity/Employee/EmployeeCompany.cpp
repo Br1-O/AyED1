@@ -4,22 +4,22 @@
 
 using namespace std;
 
-EmployeeCompany::EmployeeCompany(std::string name, std::string lastname, double salary, Branch* branch)
+EmployeeCompany::EmployeeCompany(string name, string lastname, double salary, Branch* branch)
 : IEmployee(name, lastname, salary, branch) 
 {
-    this->type = "compañia";
+    this->type = "empresa";
 }
-
-EmployeeCompany::EmployeeCompany(){}
 
 EmployeeCompany::~EmployeeCompany(){}
 
 //■■■■■■■■■■ Methods ■■■■■■■■■■//
 void EmployeeCompany::work(){
-    string_view workMessage = "El empleado de compañia llamado " + this->getName() + " " + this->getLastname() + " está trabajando.";
+    string workMessage = "El empleado de empresa llamado " + this->getName() + " " + this->getLastname() + " esta trabajando.";
     cout << workMessage <<endl;
 }
 void EmployeeCompany::getNotification(string message){
-    string generalData = "Recibió un mensaje por parte de la empresa, señor " + this->getName() + " " + this->getLastname() + ": \n";
-    cout << generalData << message << "\n Por favor, comuniquese al sector de vendedores de compañia de la empresa para saber más." << endl;
+    string generalData = "Recibiste un mensaje por parte de la empresa, " + this->getName() + " " + this->getLastname() + ": \n";
+    cout << "\n------------------------------------------" << endl;
+    cout << generalData << "\n" + message + "\n" << "\n Por favor, comuniquese al sector de vendedores de empresas para saber mas." << endl;
+    cout << "------------------------------------------" << endl;
 }

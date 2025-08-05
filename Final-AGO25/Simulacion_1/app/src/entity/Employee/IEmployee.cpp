@@ -7,7 +7,6 @@ using namespace std;
 
 IEmployee::IEmployee(std::string name, std::string lastname, double salary, Branch* branch)
 : name(name), lastname(lastname), salary(salary), branch(branch) {}
-IEmployee::IEmployee(){}
 IEmployee::~IEmployee(){}
 
 //■■■■■■■■■■ Getters ■■■■■■■■■■//
@@ -52,16 +51,19 @@ void IEmployee::setBranch(Branch* branch){
 //■■■■■■■■■■ Methods ■■■■■■■■■■//
 
 string IEmployee::toString(){
+    
+    string branchName = (this->getBranch() != nullptr) ? this->getBranch()->getName() : "SIN SUCURSAL";
+
     string fullData = 
+    "Codigo: " + this->getCode() + "\n" +
     "Nombre: " + this->getName() + "\n" +
     "Apellido: " + this->getLastname() + "\n" +
     "Salario: " + to_string(this->getSalary()) + "\n" +
     "Tipo: " + this->getType() + "\n" +
-    "Sucursal: " + this->getBranch()->getName() + "\n";
+    "Sucursal: " + branchName + "\n";
 
     return fullData;
-};
-
+}
 
 
 

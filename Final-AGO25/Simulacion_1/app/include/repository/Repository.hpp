@@ -3,25 +3,23 @@
 
 #include <iostream>
 #include <list>
-#include "../../entity/Employee/IEmployee.hpp"
-#include "../../entity/Branch/Branch.hpp"
-
-using namespace std;
+#include "../entity/Employee/IEmployee.hpp"
+#include "../entity/Branch/Branch.hpp"
 
 class Repository
 {
 private:
-    list<Branch*> branchesList = {nullptr};
+    std::list<Branch*> branchesList;
 public:
     Repository();
     ~Repository();
 //■■■■■■■■■■ Methods ■■■■■■■■■■//
     IEmployee* insertEmployee(IEmployee* newEmployee);
     Branch* insertBranch(Branch* newBranch);
-    IEmployee* getEmployeeByCode(string employeeCode);
-    Branch* getBranchByCode(string branchCode);
-    list<Branch*> getAllBranches();
-    list<IEmployee*> getEmployeesByBranchName(string branchName);
+    IEmployee* getEmployeeByCode(std::string employeeCode);
+    Branch* getBranchByCode(std::string branchCode);
+    std::list<Branch*> getAllBranches();
+    std::list<IEmployee*> getEmployeesByBranchName(std::string branchName);
 };
 
 #endif
