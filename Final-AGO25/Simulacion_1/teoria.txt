@@ -1,0 +1,91 @@
+1. ¿Qué son los paradigmas? Estructurado vs Orientado a Objetos
+
+Un paradigma de programación es un enfoque o estilo de programación que define cómo se estructuran y organizan los programas. 
+Indica cómo resolver problemas y organizar el código.
+------------------------------------------------------------------------------------
+Paradigma Estructurado
+
+Se basa en la división del problema en funciones o procedimientos.
+Usa estructuras de control como condicionales (if, switch) y bucles (for, while).
+El foco está en la lógica del programa y la secuencia de instrucciones.
+En C++, se puede programar de forma estructurada sin usar clases.
+
+- Ventajas:
+
+Simple para programas pequeños.
+Control sobre cada detalle de la implementación.
+------------------------------------------------------------------------------------
+Paradigma Orientado a Objetos (POO)
+
+Se basa en modelar objetos del mundo real, que tienen estado (atributos) y comportamiento (métodos).
+Utiliza conceptos clave como clases, objetos, herencia, polimorfismo y encapsulamiento.
+En C++, se logra utilizando clases (class) y creando instancias (objetos).
+
+- Ventajas:
+
+Facilita la reutilización, modularidad y mantenimiento.
+Útil para sistemas complejos y grandes proyectos.
+------------------------------------------------------------------------------------
+
+
+2. ¿Qué es la Abstracción?
+
+La abstracción es un principio de la programación que consiste en ocultar los detalles internos de implementación y 
+mostrar solo lo esencial o relevante para el usuario.
+
+En otras palabras: mostrar el "qué" hace un objeto y ocultar el "cómo" lo hace.
+
+Ejemplo en C++:
+
+class Calculadora {
+public:
+    int sumar(int a, int b) {
+        return a + b;
+    }
+};
+
+Quien use la clase no necesita saber cómo se implementa la suma, solo necesita saber que puede usar el método sumar.
+
+
+------------------------------------------------------------------------------------
+3. ¿Qué es el Isomorfismo de Estructuras y el GAP Semántico?
+
+- Isomorfismo de Estructuras
+Es la idea de que la estructura de los datos en la computadora debe representar fielmente la estructura lógica del problema en la vida real.
+Por ejemplo, si tenés un sistema de empleados con sucursales, deberías tener clases como Empleado y Sucursal que representen esa relación.
+
+- GAP Semántico
+Es la distancia conceptual entre el problema real y la solución computacional.
+Cuanto mayor el GAP, más difícil es traducir el problema a código.
+
+La POO reduce el GAP, ya que los objetos del código se parecen más a los del mundo real.
+
+
+------------------------------------------------------------------------------------
+4. ¿Qué es un Puntero? (C++ con enfoque en memoria dinámica)
+
+Un puntero es una variable que almacena la dirección de memoria de otra variable.
+En C++, es fundamental para crear objetos en memoria dinámica (con new y delete), lo cual es clave en estructuras como listas, árboles, etc.
+
+- Ejemplo: Crear objeto dinámico
+
+class Empleado {
+public:
+    std::string nombre;
+    Empleado(std::string n) : nombre(n) {}
+    void saludar() {
+        std::cout << "Hola, soy " << nombre << std::endl;
+    }
+};
+
+int main() {
+    // Creación en memoria dinámica
+    Empleado* e1 = new Empleado("Juan");
+
+    e1->saludar();  // Acceso con puntero
+
+    delete e1;      // Liberación de memoria
+    return 0;
+}
+
+- Se usa new para crear el objeto en el heap (memoria dinámica) y delete para liberarlo.
