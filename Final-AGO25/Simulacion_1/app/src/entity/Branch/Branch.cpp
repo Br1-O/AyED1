@@ -6,7 +6,12 @@
 using namespace std;
 
 Branch::Branch(string code, string name):code(code), name(name), employees() {}
-Branch::~Branch(){}
+Branch::~Branch(){
+    for (auto employee : employees) {
+        delete employee;
+    }
+    employees.clear();
+}
 
 //■■■■■■■■■■ Getters ■■■■■■■■■■//
 string Branch::getCode(){
