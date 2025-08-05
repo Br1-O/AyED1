@@ -4,19 +4,17 @@
 
 using namespace std;
 
-class Notificator
-{
-private:
-    string message;
-    IEmployee* receiver;
-
-public:
-    Notificator()
+Notificator::Notificator(){}
+Notificator::~Notificator(){}
+//■■■■■■■■■■ Methods ■■■■■■■■■■//
+void Notificator::notifyOne(string message, IEmployee* employee){
+    employee->getNotification(message);
+}
+void Notificator::notifyMany(string message, list<IEmployee*> employees){
+    for (auto &&employee : employees)
     {
+        employee->getNotification(message);
     }
+}
 
-    ~Notificator()
-    {
-    }
-};
 

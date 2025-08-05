@@ -6,17 +6,17 @@
 
 using namespace std;
 
-class EmployeeCompany : IEmployee
+class EmployeeCompany : public IEmployee
 {
 public:
 
-    EmployeeCompany(std::string code, std::string name, std::string lastname, double salary, AreaType area, Branch* branch);
+    EmployeeCompany(std::string name, std::string lastname, double salary, Branch* branch);
     EmployeeCompany();
     ~EmployeeCompany();
 
     //■■■■■■■■■■ Methods ■■■■■■■■■■//
     void work() override;
-
+    void getNotification(string message) override;
 };
 
 #endif

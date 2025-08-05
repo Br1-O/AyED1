@@ -2,20 +2,19 @@
 #define BRANCH_HPP
 
 #include <iostream>
-#include <vector>
-#include "../Employee/IEmployee.hpp"
+#include <list>
+#include "../../../include/entity/Employee/IEmployee.hpp"
 
 class Branch
 {
 private:
-    string code = "S-000";
+    string code = "0";
     string name = "Pinamar";
-    std::vector<IEmployee*> employees = {};
-    string address = "";
+    std::list<IEmployee*> employees = {nullptr};
 
 public:
-    Branch(string code, string name, std::vector<IEmployee*> employees, string address):
-    code(code), name(name), employees(employees), address(address){}
+    Branch(string code, string name):
+    code(code), name(name){}
     Branch(){}
     ~Branch(){}
 
@@ -26,11 +25,8 @@ public:
     string getName(){
         return this->name;
     } 
-    std::vector<IEmployee*> getEmployees(){
+    std::list<IEmployee*> getEmployees(){
         return this->employees;
-    }
-    string getAddress(){
-        return this->address;
     }
 
 //■■■■■■■■■■ Setters ■■■■■■■■■■//
@@ -40,11 +36,8 @@ public:
     void setName(string name){
         this->name = name;
     }
-    void setEmployees(std::vector<IEmployee*> employees){
+    void setEmployees(std::list<IEmployee*> employees){
         this->employees = employees;
-    }
-    void setAddress(string address){
-        this->address = address;
     }
 
 //■■■■■■■■■■ Methods ■■■■■■■■■■//
@@ -52,7 +45,6 @@ public:
         string fullData = 
         "Código: " + this->getCode() + "\n " +
         "Nombre: " + this->getName() + "\n" +
-        "Dirección: " + this->getAddress() + "\n" +
         "Empleados: " + "\n";
 
         return fullData;

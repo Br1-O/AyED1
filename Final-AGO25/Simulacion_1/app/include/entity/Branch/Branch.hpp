@@ -2,7 +2,7 @@
 #define BRANCH_HPP
 
 #include <iostream>
-#include <vector>
+#include <list>
 #include "../Employee/IEmployee.hpp"
 
 class Branch
@@ -10,25 +10,22 @@ class Branch
 private:
     string code;
     string name;
-    std::vector<IEmployee*> employees;
-    string address;
+    std::list<IEmployee*> employees = {nullptr};
 
 public:
-    Branch(string code, string name, std::vector<IEmployee*> employees, string address);
+    Branch(string code, string name);
     Branch();
     ~Branch();
 
 //■■■■■■■■■■ Getters ■■■■■■■■■■//
     string getCode();
     string getName();
-    std::vector<IEmployee*> getEmployees();
-    string getAddress();
+    std::list<IEmployee*> getEmployees();
 
 //■■■■■■■■■■ Setters ■■■■■■■■■■//
     void setCode(string code);
     void setName(string name);
-    void setEmployees(std::vector<IEmployee*> employees);
-    void setAddress(string address);
+    void setEmployees(std::list<IEmployee*> employees);
 
 //■■■■■■■■■■ Methods ■■■■■■■■■■//
     string toString();
