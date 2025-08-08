@@ -4,8 +4,8 @@
 
 using namespace std;
 
-EmployeeParticular::EmployeeParticular(string name, string lastname, double salary, Branch* branch)
-: IEmployee(name, lastname, salary, branch) 
+EmployeeParticular::EmployeeParticular(string name, string lastname, double salary)
+: IEmployee(name, lastname, salary) 
 {
     this->type = "particular";
 }

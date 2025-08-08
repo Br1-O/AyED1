@@ -48,20 +48,20 @@ void EmployeeBranchService::addEmployee(){
         switch (iType)
         {
         case 0:
-            newEmployee = new EmployeeParticular(name, lastname, dSalary, branch);
+            newEmployee = new EmployeeParticular(name, lastname, dSalary);
             break;
         case 1:
-            newEmployee = new EmployeeProfessional(name, lastname, dSalary, branch);
+            newEmployee = new EmployeeProfessional(name, lastname, dSalary);
             break;
         case 2:
-            newEmployee = new EmployeeCompany(name, lastname, dSalary, branch);
+            newEmployee = new EmployeeCompany(name, lastname, dSalary);
             break;
         default:
-            newEmployee = new EmployeeParticular(name, lastname, dSalary, branch);
+            newEmployee = new EmployeeParticular(name, lastname, dSalary);
             break;
         }
 
-        repo->insertEmployee(newEmployee);
+        repo->insertEmployee(newEmployee, branchCode);
         cout << "\n Empleado agregado correctamente! \n" << endl;
     }
     catch(const std::exception& e)

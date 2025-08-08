@@ -7,7 +7,7 @@
 class EmployeeCompany : public IEmployee
 {
 public:
-    EmployeeCompany(std::string name, std::string lastname, double salary, Branch* branch);
+    EmployeeCompany(std::string name, std::string lastname, double salary);
     ~EmployeeCompany();
 
     //■■■■■■■■■■ Methods ■■■■■■■■■■//

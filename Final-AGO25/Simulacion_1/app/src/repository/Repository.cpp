@@ -12,7 +12,7 @@ Repository::~Repository(){}
 
 //■■■■■■■■■■ Methods ■■■■■■■■■■//
 
-IEmployee* Repository::insertEmployee(IEmployee* newEmployee){
+IEmployee* Repository::insertEmployee(IEmployee* newEmployee, string branchCode){
     IEmployee* employeeInserted = nullptr;
     int maxCode = 0;
 
@@ -36,8 +36,7 @@ IEmployee* Repository::insertEmployee(IEmployee* newEmployee){
             if (
                 branch != nullptr && 
                 newEmployee != nullptr &&
-                newEmployee->getBranch() != nullptr &&
-                branch->getCode() == newEmployee->getBranch()->getCode()
+                branch->getCode() == branchCode
             ) {
                 list<IEmployee*> employees = branch->getEmployees();
                 employees.push_back(newEmployee);

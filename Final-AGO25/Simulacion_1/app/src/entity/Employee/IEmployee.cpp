@@ -5,8 +5,8 @@
 
 using namespace std;
 
-IEmployee::IEmployee(std::string name, std::string lastname, double salary, Branch* branch)
-: name(name), lastname(lastname), salary(salary), branch(branch) {}
+IEmployee::IEmployee(std::string name, std::string lastname, double salary)
+: name(name), lastname(lastname), salary(salary) {}
 IEmployee::~IEmployee(){}
 
 //■■■■■■■■■■ Getters ■■■■■■■■■■//
@@ -26,9 +26,6 @@ double IEmployee::getSalary(){
 string IEmployee::getType(){
     return this->type;
 }
-Branch* IEmployee::getBranch(){
-    return this->branch;
-}
 
 //■■■■■■■■■■ Setters ■■■■■■■■■■//
 
@@ -44,23 +41,17 @@ void IEmployee::setLastname(string lastname){
 void IEmployee::setSalary(double salary){
     this->salary = salary;
 }
-void IEmployee::setBranch(Branch* branch){
-    this->branch = branch;
-}
 
 //■■■■■■■■■■ Methods ■■■■■■■■■■//
 
 string IEmployee::toString(){
     
-    string branchName = (this->getBranch() != nullptr) ? this->getBranch()->getName() : "SIN SUCURSAL";
-
     string fullData = 
     "Codigo: " + this->getCode() + "\n" +
     "Nombre: " + this->getName() + "\n" +
     "Apellido: " + this->getLastname() + "\n" +
     "Salario: " + to_string(this->getSalary()) + "\n" +
-    "Tipo: " + this->getType() + "\n" +
-    "Sucursal: " + branchName + "\n";
+    "Tipo: " + this->getType() + "\n";
 
     return fullData;
 }

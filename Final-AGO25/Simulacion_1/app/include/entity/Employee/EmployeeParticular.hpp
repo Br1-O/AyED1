@@ -8,7 +8,7 @@ class EmployeeParticular : public IEmployee
 {
 public:
 
-    EmployeeParticular(std::string name, std::string lastname, double salary, Branch* branch);
+    EmployeeParticular(std::string name, std::string lastname, double salary);
     ~EmployeeParticular();
 
     //■■■■■■■■■■ Methods ■■■■■■■■■■//

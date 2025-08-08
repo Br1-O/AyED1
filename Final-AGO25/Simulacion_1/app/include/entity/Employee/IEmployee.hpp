@@ -12,13 +12,12 @@ private:
     std::string name = "-";
     std::string lastname = "-";
     double salary = 0.0;
-    Branch* branch;
 
 protected:
     std::string type = "-";
     
 public:
-    IEmployee(std::string name, std::string lastname, double salary, Branch* branch);
+    IEmployee(std::string name, std::string lastname, double salary);
     ~IEmployee();
 
 //■■■■■■■■■■ Getters ■■■■■■■■■■//
@@ -27,14 +26,12 @@ public:
     std::string getLastname();
     double getSalary();
     std::string getType();
-    Branch* getBranch();
 
 //■■■■■■■■■■ Setters ■■■■■■■■■■//
     void setCode(std::string code);
     void setName(std::string name);
     void setLastname(std::string lastname);
     void setSalary(double salary);
-    void setBranch(Branch* branch);
 
 //■■■■■■■■■■ Methods ■■■■■■■■■■//
     virtual void work() = 0;

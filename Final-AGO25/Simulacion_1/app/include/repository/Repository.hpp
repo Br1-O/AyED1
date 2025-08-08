@@ -14,7 +14,7 @@ public:
     Repository();
     ~Repository();
 //■■■■■■■■■■ Methods ■■■■■■■■■■//
-    IEmployee* insertEmployee(IEmployee* newEmployee);
+    IEmployee* insertEmployee(IEmployee* newEmployee, std::string branchCode);
     Branch* insertBranch(Branch* newBranch);
     IEmployee* getEmployeeByCode(std::string employeeCode);
     Branch* getBranchByCode(std::string branchCode);

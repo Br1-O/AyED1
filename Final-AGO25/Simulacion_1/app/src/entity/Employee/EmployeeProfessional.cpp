@@ -4,8 +4,8 @@
 
 using namespace std;
 
-EmployeeProfessional::EmployeeProfessional(string name, string lastname, double salary, Branch* branch)
-: IEmployee(name, lastname, salary, branch) 
+EmployeeProfessional::EmployeeProfessional(string name, string lastname, double salary)
+: IEmployee(name, lastname, salary) 
 {
     this->type = "profesional";
 }
